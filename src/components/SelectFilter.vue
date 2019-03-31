@@ -38,9 +38,12 @@ export default {
       } else {
         filterFunc = items => {
           const filteredItems = items.filter(item => {
-            return item[this.columnName].split(", ").some(itemValue => {
-              return this.selectedValues.includes(itemValue);
-            });
+            return item[this.columnName]
+              .split(",")
+              .map(str => str.trim())
+              .some(itemValue => {
+                return this.selectedValues.includes(itemValue);
+              });
           });
           return filteredItems;
         };

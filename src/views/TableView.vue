@@ -50,7 +50,7 @@ function getAvailableSelections(characters, columnName) {
   characters
     .map(character => character[columnName])
     .forEach(value => {
-      allAvailableSelections.push(...value.split(", "));
+      allAvailableSelections.push(...value.split(",").map(str => str.trim()));
     });
   const uniqueAvailableSelections = [...new Set(allAvailableSelections)].sort();
   return uniqueAvailableSelections;
