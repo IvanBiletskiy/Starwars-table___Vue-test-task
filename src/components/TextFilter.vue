@@ -1,6 +1,11 @@
 <template>
-  <div>
-    <input v-model="inputValue" type="text" />
+  <div class="text-filter-container">
+    <input
+      v-model="inputValue"
+      type="text"
+      class="text-filter-input"
+      placeholder="search"
+    />
   </div>
 </template>
 
@@ -14,7 +19,6 @@ export default {
   },
   watch: {
     inputValue() {
-      console.log("inputValue changed", this.inputValue);
       this.$emit("new-text-filter-function", this.createFilter());
     }
   },
@@ -31,4 +35,12 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style>
+.text-filter-container {
+  padding-top: 0.2em;
+}
+.text-filter-input {
+  width: 100%;
+  padding: 0.5em;
+}
+</style>

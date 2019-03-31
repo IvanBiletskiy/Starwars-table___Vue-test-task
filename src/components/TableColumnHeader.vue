@@ -1,13 +1,19 @@
 <template>
-  <th>
-    <div @click="handleSortClick">
-      {{ column.title }}
-      {{ sortingSymbol }}
+  <th class="table-column-header">
+    <div>
+      <div
+        @click="handleSortClick"
+        class="table-column-header-title"
+        :class="{ active: isSorted }"
+      >
+        {{ column.title }}
+        {{ sortingSymbol }}
+      </div>
+      <ColumnFilter
+        :column="column"
+        @new-filter-function="handleNewFilterFunction"
+      />
     </div>
-    <ColumnFilter
-      :column="column"
-      @new-filter-function="handleNewFilterFunction"
-    />
   </th>
 </template>
 
@@ -30,8 +36,8 @@ export default {
     sortingSymbol() {
       return this.isSorted
         ? this.sortOrder === SortOrders.MAX_TO_MIN
-          ? "⇧"
-          : "⇩"
+          ? "⏶"
+          : "⏷"
         : "";
     }
   },
@@ -86,4 +92,18 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.table-column-header {
+  vertical-align: top;
+}
+.table-column-header-title {
+  text-align: center;
+}
+.active {
+  font-weight: bold;
+}
+.table-column-header-title:hover {
+  cursor: pointer;
+  font-weight: bold;
+}
+</style>

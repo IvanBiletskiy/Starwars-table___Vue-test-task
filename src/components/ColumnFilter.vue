@@ -1,5 +1,5 @@
 <template>
-  <div class="filter">
+  <div>
     <select-filter
       v-if="isSelectFilter"
       :availableSelections="column.availableSelections"
@@ -38,8 +38,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.filter {
-  border: 1px solid black;
-}
-</style>
+<style></style>

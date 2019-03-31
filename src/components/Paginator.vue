@@ -1,9 +1,9 @@
 <template>
   <div>
     <paginate
+      v-model="currentPage"
       :pageCount="pageCount"
       :containerClass="'pagination'"
-      :clickHandler="clickCallback"
     ></paginate>
   </div>
 </template>
@@ -18,25 +18,29 @@ export default {
   },
   data() {
     return {
-      currentPage: 0
+      currentPage: 1
     };
   },
   computed: {
+    currentPageIndex() {
+      return this.currentPage - 1;
+    },
     pageCount() {
       return Math.ceil(this.filteredItems.length / this.itemsOnPageCount);
     },
     startIndex() {
-      return this.currentPage * this.itemsOnPageCount;
+      return this.currentPageIndex * this.itemsOnPageCount;
     },
     endIndex() {
       return this.startIndex + this.itemsOnPageCount;
     }
   },
+  watch: {
+    filteredItems() {
+      this.currentPage = 1;
+    }
+  },
   methods: {
-    clickCallback(pageNumber) {
-      this.currentPage = pageNumber - 1;
-      // this.$emit("new-window-function", this.windowFunction());
-    },
     windowFunction(items) {
       return items.filter(
         (item, index) => index >= this.startIndex && index < this.endIndex
